@@ -24,11 +24,22 @@ add.addEventListener('click', function() {
   remove.classList.add('remove');
   remove.innerHTML = removeIcon;
 
+  //削除ボタンをクリック
+  remove.addEventListener('click', function() {
+    let task = this.parentNode.parentNode;
+    task.remove();
+  })
 
-//完成ボタン作成
+
+//完了ボタン作成
   let done = document.createElement('button');
   done.classList.add('done');
   done.innerHTML = doneIcon;
+
+  done.addEventListener('click', function() {
+    let task = this.parentNode.parentNode;
+    document.getElementById('done').appendChild(task);
+  })
 
 
 //ユーザーが入力した内容を未完了一覧に追加
@@ -42,5 +53,19 @@ add.addEventListener('click', function() {
 //ユーザーが入力した内容を消す処理
   document.getElementById('task').value = '';
 
-
 })  
+
+
+
+
+//未完了を完了にする処理
+//完了ボタンをクリックする
+//完了一覧に追加
+//未完了一覧から削除
+
+
+
+
+//未完了を削除する処理
+//削除ボタンをクリック
+//未完了一覧から削除
