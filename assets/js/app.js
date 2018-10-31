@@ -13,10 +13,34 @@ add.addEventListener('click', function() {
 //追加する要素を作成
   let li = document.createElement('li');
   let task = document.createTextNode(taskName);
-  console.log(li);
+  // console.log(li);
+
+//ボタンを表示する場所
+  let buttons = document.createElement('div');
+  buttons.classList.add('buttons');
+
+//削除ボタン作成
+  let remove = document.createElement('button');
+  remove.classList.add('remove');
+  remove.innerHTML = removeIcon;
+
+
+//完成ボタン作成
+  let done = document.createElement('button');
+  done.classList.add('done');
+  done.innerHTML = doneIcon;
+
 
 //ユーザーが入力した内容を未完了一覧に追加
+  buttons.appendChild(remove);
+  buttons.appendChild(done);
+  li.appendChild(buttons);
   document.getElementById('not-yet').appendChild(li).appendChild(task);
+
+
+
+//ユーザーが入力した内容を消す処理
+  document.getElementById('task').value = '';
 
 
 })  
