@@ -97,10 +97,9 @@ function addTaskToDOM(taskName) {
   document.getElementById('not-yet').appendChild(li).appendChild(task);
   }
 
-
   function removeTask() {
     let task = this.parentNode.parentNode;
-// 
+// ゴミ箱を押してリロードしても出てこないようにする
     let value = task.textContent;
     // console.log(task.textContent);
 
@@ -124,7 +123,27 @@ function addTaskToDOM(taskName) {
 
   function doneTask() {
     let task = this.parentNode.parentNode;
-    document.getElementById('done').appendChild(task);
+    let id = task.parentNode.id;
+    let value = task.textContent;
+
+    let target = document.getElementById('done');
+    target.appendChild(task);
+
+// DBを更新
+    /* DB更新の流れ
+       1．画面を更新する
+       2．配列を更新する
+       3．DBを更新する
+
+       DBの中身を画面に表示するとき
+       DBからデータを取得する　getItem
+       データを配列に格納する
+       画面に表示する
+    */ 
+  data.li.splice(data.li.indexOf(value), 1);
+  data.done.push(value);
+  dataObjectUpdated();
+  console.log(data);
 }
 
 function dataObjectUpdated () {
@@ -144,7 +163,6 @@ function dataObjectUpdated () {
 　-保存したデータを画面に表示する処理
   登録 → 一覧 → 削除 → 更新
 */ 
-
 
 
 /* 
