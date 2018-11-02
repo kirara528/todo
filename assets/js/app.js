@@ -142,6 +142,10 @@ function addTaskToDOM(taskName, isDone) {
   function doneTask() {
     let task = this.parentNode.parentNode;
     let id = task.parentNode.id;
+    if (id === 'done') {
+      return;
+    }
+    
     let value = task.textContent;
 
     let target = document.getElementById('done');
