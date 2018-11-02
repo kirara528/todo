@@ -11,10 +11,8 @@ if (localStorage.getItem('todoList')) {
   // データを取り出す
   data = JSON.parse(localStorage.getItem('todoList'));
  
-  // 取得したデータを画面に表示する
-  for (let taskName of data.li) {
-   addTaskToDOM(taskName);
-  }
+  renderTodoList();
+
 } else {　// そうでなければ
   　// データの保存先を作成
   data = {
@@ -60,7 +58,17 @@ add.addEventListener('click', function() {
 //----------------関数-----------------
 
 // function + 関数名 + (仮引数) {}
-function addTaskToDOM(taskName) {
+function addTaskToDOM(taskName, isDone) {
+
+  let list;
+  if (isDone) {
+    list = document.getElementById('done');
+  } else {
+    list = document.getElementById('not-yet');
+  }
+
+
+
 // 追加する要素を作成
   let li = document.createElement('li');
   let task = document.createTextNode(taskName);
@@ -94,7 +102,7 @@ function addTaskToDOM(taskName) {
   buttons.appendChild(remove);
   buttons.appendChild(done);
   li.appendChild(buttons);
-  document.getElementById('not-yet').appendChild(li).appendChild(task);
+  list.appendChild(li).appendChild(task);
   }
 
   function removeTask() {
@@ -148,6 +156,17 @@ function addTaskToDOM(taskName) {
 
 function dataObjectUpdated () {
   localStorage.setItem('todoList', JSON.stringify(data));
+}
+
+function renderTodoList() {
+    // 取得したデータを画面に表示する
+  for (let taskName of data.li) {
+    addTaskToDOM(taskName, false);
+  }
+
+  for (let taskName of data.done) {
+    addTaskToDOM(taskName, true);
+  }
 }
 
 // ↓この書き方でもOK
