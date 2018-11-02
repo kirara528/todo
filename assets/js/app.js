@@ -107,11 +107,21 @@ function addTaskToDOM(taskName, isDone) {
 
   function removeTask() {
     let task = this.parentNode.parentNode;
+    let id = task.parentNode.id;
+    console.log(id);
 // ゴミ箱を押してリロードしても出てこないようにする
     let value = task.textContent;
     // console.log(task.textContent);
 
     task.remove();
+
+// DBから削除
+  if (id === 'not-yet') {
+    data.li.splice(data.li.indexOf(value), 1);
+  } else {
+    data.done.splice(data.done.indexOf(value), 1);
+  }
+  dataObjectUpdated();
 
     let hoge = data.li.indexOf(value);
 // 文字列の中の一番最初の値を呼び戻す
