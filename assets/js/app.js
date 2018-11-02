@@ -48,14 +48,16 @@ add.addEventListener('click', function() {
   data.li.push(taskName);
 
 // 配列をDBに保存
-  localStorage.setItem('todoList', JSON.stringify(data));
-  
+  dataObjectUpdated();
 })  
 
 
 //　関数名 addTaskToDOM
 //　引数にユーザーが入力したtaskを入れる
 //　仮引数の名前はtaskName
+
+
+//----------------関数-----------------
 
 // function + 関数名 + (仮引数) {}
 function addTaskToDOM(taskName) {
@@ -74,10 +76,7 @@ function addTaskToDOM(taskName) {
   remove.innerHTML = removeIcon;
 
 // 削除ボタンをクリック
-  remove.addEventListener('click', function() {
-    let task = this.parentNode.parentNode;
-    task.remove();
-  })
+  remove.addEventListener('click', removeTask);
 
 // 完了ボタン作成
   let done = document.createElement('button');
@@ -86,19 +85,51 @@ function addTaskToDOM(taskName) {
 
 
 // 完了一覧に追加し、未完了一覧から削除
-  done.addEventListener('click', function() {
-    let task = this.parentNode.parentNode;
-    document.getElementById('done').appendChild(task);
-  })
+  done.addEventListener('click', doneTask);
 
+
+  document.getElementById('done').appendChild(task);
 
 // ユーザーが入力した内容を未完了一覧に追加
   buttons.appendChild(remove);
   buttons.appendChild(done);
   li.appendChild(buttons);
   document.getElementById('not-yet').appendChild(li).appendChild(task);
+  }
 
-};
+
+  function removeTask() {
+    let task = this.parentNode.parentNode;
+// 
+    let value = task.textContent;
+    // console.log(task.textContent);
+
+    task.remove();
+
+    let hoge = data.li.indexOf(value);
+// 文字列の中の一番最初の値を呼び戻す
+// data.li(配列)の中で1番目にvalueが出てきたところを返す
+    // console.log(hoge);
+    // console.log(value);
+    // console.log(data.li);
+
+//ユーザーがクリックしたtodoを配列から削除
+    data.li.splice(hoge, 1);
+// date.liの中のhoge番目を消す
+    // data.li.splice(data.li.indexOf(value), 1);
+
+// 配列をDBに保存している
+    dataObjectUpdated();
+  }
+
+  function doneTask() {
+    let task = this.parentNode.parentNode;
+    document.getElementById('done').appendChild(task);
+}
+
+function dataObjectUpdated () {
+  localStorage.setItem('todoList', JSON.stringify(data));
+}
 
 // ↓この書き方でもOK
 // let addTaskToDOM = function(taskName) {
@@ -114,5 +145,22 @@ function addTaskToDOM(taskName) {
   登録 → 一覧 → 削除 → 更新
 */ 
 
+
+
+/* 
+   let = functionName = function() {}
+       → 変数の時　reference error;
+   funtion functionName() {}
+       → 関数のとき　OK
+
+ー変数は定義した行より下じゃないと使えない
+ー関数は定義した行より上でも使える
+*/
+
+// 関数を作るとき
+//   1．同じ処理が2回出ていた時
+//   2．単一責任の原則
+//   3．処理だけ見ても何を意味しているのかよくわからない。名前つけたくなった時
+//   4．外の動きは変えずに中のコードを変えることをリファクタリングという。
 
 
