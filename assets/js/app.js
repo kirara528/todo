@@ -108,7 +108,6 @@ function addTaskToDOM(taskName, isDone) {
   function removeTask() {
     let task = this.parentNode.parentNode;
     let id = task.parentNode.id;
-    console.log(id);
 // ゴミ箱を押してリロードしても出てこないようにする
     let value = task.textContent;
     // console.log(task.textContent);
@@ -123,7 +122,7 @@ function addTaskToDOM(taskName, isDone) {
   }
   dataObjectUpdated();
 
-    let hoge = data.li.indexOf(value);
+    // let hoge = data.li.indexOf(value);
 // 文字列の中の一番最初の値を呼び戻す
 // data.li(配列)の中で1番目にvalueが出てきたところを返す
     // console.log(hoge);
@@ -131,12 +130,12 @@ function addTaskToDOM(taskName, isDone) {
     // console.log(data.li);
 
 //ユーザーがクリックしたtodoを配列から削除
-    data.li.splice(hoge, 1);
+    // data.li.splice(hoge, 1);
 // date.liの中のhoge番目を消す
     // data.li.splice(data.li.indexOf(value), 1);
 
 // 配列をDBに保存している
-    dataObjectUpdated();
+    // dataObjectUpdated();
   }
 
   function doneTask() {
@@ -145,7 +144,7 @@ function addTaskToDOM(taskName, isDone) {
     if (id === 'done') {
       return;
     }
-    
+
     let value = task.textContent;
 
     let target = document.getElementById('done');
