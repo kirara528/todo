@@ -32,13 +32,22 @@ add.addEventListener('click', function() {
   done.classList.add('done');
   done.innerHTML = doneIcon;
 
+  //Not yetで完了ボタンが押されたら
+  done.addEventListener('click', function(){
+    let task = this.parentNode.parentNode;
+    console.log(task);
+
+    let target = document.getElementById('done');
+    target.appendChild(task);
+  })
+
   //ユーザーが入力した内容をnot yet一覧に追加
   buttons.appendChild(remove);
   buttons.appendChild(done);
   li.appendChild(buttons);
   document.getElementById('not-yet').appendChild(li);
 
-
+  
 })
 
  
