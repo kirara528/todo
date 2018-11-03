@@ -26,6 +26,11 @@ add.addEventListener('click', function() {
   remove.innerHTML = removeIcon;
  
   //削除ボタンをクリック
+  remove.addEventListener('click', function() {
+    task = this.parentNode.parentNode;
+
+    task.remove();
+  })
 
   //完了ボタンを作成
   let done = document.createElement('button');
