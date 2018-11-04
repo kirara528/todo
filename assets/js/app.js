@@ -3,7 +3,6 @@ let doneIcon = '<i class="far fa-check-circle fa-lg"></i>';
 
 
 // Todoを画面に追加
-
  // 追加ボタンがクリックされたら
 let add = document.getElementById('add');
 add.addEventListener('click', function() {
@@ -28,7 +27,6 @@ add.addEventListener('click', function() {
   //削除ボタンをクリック
   remove.addEventListener('click', function() {
     task = this.parentNode.parentNode;
-
     task.remove();
   })
 
@@ -40,10 +38,8 @@ add.addEventListener('click', function() {
   //Not yetで完了ボタンが押されたら
   done.addEventListener('click', function(){
     let task = this.parentNode.parentNode;
-    console.log(task);
 
-    let target = document.getElementById('done');
-    target.appendChild(task);
+    document.getElementById('done').appendChild(task);
   })
 
   //ユーザーが入力した内容をnot yet一覧に追加
@@ -51,6 +47,9 @@ add.addEventListener('click', function() {
   buttons.appendChild(done);
   li.appendChild(buttons);
   document.getElementById('not-yet').appendChild(li);
+
+  document.getElementById('task').value = '';
+
 
   
 })
