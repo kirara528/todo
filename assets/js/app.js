@@ -1,6 +1,22 @@
 let removeIcon = '<i class="far fa-trash-alt fa-lg"></i>';
 let doneIcon = '<i class="far fa-check-circle fa-lg"></i>';
+let data;
 
+
+// もしデータが保存されていれば
+if (lacalStorage.getItem('todoList')) {
+  data = JSON.parse(lacalStorage.getItem('todoList'));
+
+// データを取り出す
+  renderTodoList();
+  
+} else {
+  // データの保存先を作成
+  data = {
+    li: [],
+    done: []
+  };
+}
 
 // Todoを画面に追加
  // 追加ボタンがクリックされたら
@@ -8,6 +24,18 @@ let add = document.getElementById('add');
 add.addEventListener('click', function() {
   let taskName = document.getElementById('task').value;
   // console.log(taskName);
+
+  function addTaskToDOM(text, isDone) {
+    let list;
+    if (isDone) {
+      list = document.getElementById('done');
+    } else {
+      list = document.getElementById('not-yet');
+    }
+
+
+  }
+
 
   //追加する要素を作成
   let li = document.createElement('li');
@@ -28,7 +56,7 @@ add.addEventListener('click', function() {
   remove.addEventListener('click', function() {
     task = this.parentNode.parentNode;
     task.remove();
-  })
+  })  
 
   //完了ボタンを作成
   let done = document.createElement('button');
@@ -46,7 +74,7 @@ add.addEventListener('click', function() {
   buttons.appendChild(remove);
   buttons.appendChild(done);
   li.appendChild(buttons);
-  document.getElementById('not-yet').appendChild(li);
+// document.getElementById('not-yet').appendChild(li);
 
   document.getElementById('task').value = '';
 
